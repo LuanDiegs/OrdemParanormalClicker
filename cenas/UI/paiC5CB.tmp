@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://cf7mjv0iys3f"]
+
+[ext_resource type="FontFile" uid="uid://c516s07a17b2w" path="res://src/fontes/Roman_New_Times.otf" id="1_3wsdh"]
+[ext_resource type="Script" path="res://scripts/painel_status.gd" id="1_p6hbq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f3udu"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 0.454902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="PainelStatus" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p6hbq")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 782.0
+offset_top = 1.0
+offset_right = 1279.0
+offset_bottom = 127.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_f3udu")
+
+[node name="TextoZumbisSangue" type="Label" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -479.0
+offset_top = 5.0
+offset_right = -14.0
+offset_bottom = 55.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("1_3wsdh")
+theme_override_font_sizes/font_size = 48
+text = "Zumbis de sangue derrotados: 0"
+autowrap_mode = 2

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bg75otubeij3f"
+path="res://.godot/imported/Sangue (192).mp3-9cc4615bc0f63b3fce3eaa84b3616072.mp3str"
+
+[deps]
+
+source_file="res://src/music/Sangue (192).mp3"
+dest_files=["res://.godot/imported/Sangue (192).mp3-9cc4615bc0f63b3fce3eaa84b3616072.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

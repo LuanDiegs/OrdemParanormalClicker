@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=3 uid="uid://pr884lmghdvu"]
+
+[ext_resource type="Texture2D" uid="uid://njtpwynmwqfy" path="res://src/imagens/zumbiSangue.webp" id="1_fc6xc"]
+[ext_resource type="Script" path="res://scripts/zumbi_de_sangue.gd" id="1_n6t21"]
+[ext_resource type="Texture2D" uid="uid://w74ocdfyvn04" path="res://src/imagens/zumbi de sangue morto.webp" id="3_fvy8a"]
+[ext_resource type="Script" path="res://scripts/alteraSpritesRandomicos.gd" id="3_tkw43"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htntf"]
+size = Vector2(37, 67)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggwl6"]
+size = Vector2(42, 67)
+
+[sub_resource type="Animation" id="Animation_l2yon"]
+resource_name = "morte"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ZumbiVivo:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(2.92817, 1),
+"update": 0,
+"values": [Vector2(0.0789637, 0.0789637), Vector2(0.0789637, 0.0231458)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ZumbiDeSangueMorto:visible")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 6.06286),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ZumbiVivo:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 4.28708, 1),
+"update": 1,
+"values": [true, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nc58f"]
+_data = {
+"morte": SubResource("Animation_l2yon")
+}
+
+[node name="ZumbiDeSangue" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_n6t21")
+
+[node name="ZumbiVivo" type="Sprite2D" parent="."]
+position = Vector2(9.53674e-07, 1)
+scale = Vector2(0.0789637, 0.0789637)
+texture = ExtResource("1_fc6xc")
+script = ExtResource("3_tkw43")
+
+[node name="ZumbiDeSangueMorto" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-3, 1)
+scale = Vector2(0.181, 0.182994)
+texture = ExtResource("3_fvy8a")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-4.5, 0.5)
+shape = SubResource("RectangleShape2D_htntf")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Morte" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-4, 0.5)
+shape = SubResource("RectangleShape2D_ggwl6")
+debug_color = Color(0.962985, 0, 0.501385, 0.42)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nc58f")
+}
+
+[node name="TempoParaDesaparecer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="TempoParaDesaparecer" to="." method="_on_tempo_para_desaparecer_timeout"]

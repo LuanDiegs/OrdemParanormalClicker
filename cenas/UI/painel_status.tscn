@@ -1,0 +1,143 @@
+[gd_scene load_steps=6 format=3 uid="uid://cf7mjv0iys3f"]
+
+[ext_resource type="FontFile" uid="uid://c516s07a17b2w" path="res://src/fontes/Roman_New_Times.otf" id="1_3wsdh"]
+[ext_resource type="Script" path="res://scripts/painel_status.gd" id="1_p6hbq"]
+[ext_resource type="Texture2D" uid="uid://njtpwynmwqfy" path="res://src/imagens/zumbiSangue.webp" id="3_yl53b"]
+
+[sub_resource type="Theme" id="Theme_unf27"]
+Button/fonts/font = ExtResource("1_3wsdh")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f3udu"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 0.454902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="PainelStatus" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_unf27")
+script = ExtResource("1_p6hbq")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 757.0
+offset_top = 1.0
+offset_right = 1279.0
+offset_bottom = 127.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_f3udu")
+
+[node name="TextoZumbisSangue" type="Label" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -511.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 55.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("1_3wsdh")
+theme_override_font_sizes/font_size = 48
+text = "Zumbis de sangue derrotados: 0"
+autowrap_mode = 2
+
+[node name="AumentaDano" type="Panel" parent="."]
+offset_left = 257.0
+offset_top = 586.0
+offset_right = 364.0
+offset_bottom = 645.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_f3udu")
+
+[node name="PrecoSubirNivel" type="Label" parent="AumentaDano"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -91.0
+offset_top = -15.0
+offset_right = 5.0
+offset_bottom = 83.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("1_3wsdh")
+theme_override_font_sizes/font_size = 75
+text = "0
+"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="AumentaDano"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 8.0
+offset_right = 985.0
+offset_bottom = 865.0
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("3_yl53b")
+
+[node name="AumentoDano" type="Button" parent="."]
+unique_name_in_owner = true
+offset_top = 586.0
+offset_right = 247.0
+offset_bottom = 644.0
+theme_override_font_sizes/font_size = 48
+text = "Aumentar dano"
+
+[node name="DiminuitCooldown" type="Panel" parent="."]
+offset_left = 590.0
+offset_top = 514.0
+offset_right = 697.0
+offset_bottom = 573.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_f3udu")
+
+[node name="PrecoSubirNivelCooldown" type="Label" parent="DiminuitCooldown"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -91.0
+offset_top = -15.0
+offset_right = 5.0
+offset_bottom = 83.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("1_3wsdh")
+theme_override_font_sizes/font_size = 75
+text = "0
+"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="DiminuitCooldown"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 8.0
+offset_right = 985.0
+offset_bottom = 865.0
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("3_yl53b")
+
+[node name="DiminuirCooldown" type="Button" parent="."]
+layout_mode = 0
+offset_top = 514.0
+offset_right = 579.0
+offset_bottom = 573.0
+theme_override_font_sizes/font_size = 48
+text = "Aumentar taxa de spawn dos inimigos"
+icon_alignment = 1
+
+[connection signal="pressed" from="AumentoDano" to="." method="_on_aumento_dano_pressed"]
+[connection signal="pressed" from="DiminuirCooldown" to="." method="_on_diminuir_cooldown_pressed"]

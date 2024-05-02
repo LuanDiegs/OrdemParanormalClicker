@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmm3yjwnywjsc"]
+
+[ext_resource type="Texture2D" uid="uid://csvr55pmaysb7" path="res://src/imagens/personagem.webp" id="1_1flho"]
+[ext_resource type="Script" path="res://scripts/jogador.gd" id="1_3lhhy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d3k05"]
+radius = 13.0
+height = 72.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mp0da"]
+radius = 14.0
+height = 74.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h36mp"]
+radius = 168.027
+
+[node name="Jogador" type="CharacterBody2D"]
+script = ExtResource("1_3lhhy")
+
+[node name="Personagem" type="Sprite2D" parent="."]
+visibility_layer = 2
+texture_filter = 2
+scale = Vector2(0.030146, 0.0301458)
+texture = ExtResource("1_1flho")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CapsuleShape2D_d3k05")
+
+[node name="AreaHit" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="AreaColisao" type="CollisionShape2D" parent="AreaHit"]
+shape = SubResource("CapsuleShape2D_mp0da")
+debug_color = Color(0.394099, 0, 0.126595, 0.42)
+
+[node name="AreaDeObservacao" type="Area2D" parent="."]
+scale = Vector2(1.96, 1.96)
+collision_layer = 0
+collision_mask = 2
+
+[node name="AreaDeObservacao" type="CollisionShape2D" parent="AreaDeObservacao"]
+position = Vector2(2.04082, 0)
+shape = SubResource("CircleShape2D_h36mp")
+
+[node name="CooldownAtaque" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="body_entered" from="AreaHit" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="AreaHit" to="." method="_on_area_hit_body_entered"]
+[connection signal="body_entered" from="AreaDeObservacao" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="CooldownAtaque" to="." method="_on_cooldown_ataque_timeout"]
